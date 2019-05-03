@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}查看訂單{% endblock %}
+{% block content %}
+    <div class="middle_page">
+        <table class="table_odr">
+            <thead>
+            <tr>
+                <th>訂單日期</th>
+                <th>祭拜對象</th>
+                <th>訂購項目</th>
+                <th>訂單狀態</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="tr_order">
+                <td><strong>2018-04-14</strong></td>
+                <td>玄天上帝(4/18)</td>
+                <td>香 蠟燭 金紙 泡麵 水果</td>
+                <td class="status">處理中</td>
+                <td class="col_delete">
+                    <button class="btn_delete" onclick="deleteorder(this)">取消訂單</button>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>2018-04-02</strong></td>
+                <td>清明節(4/5)</td>
+                <td>香 蠟燭 金紙</td>
+                <td class="status">已送達</td>
+                <td class="col_delete">
+                    <button class="btn_delete" onclick="">取消訂單</button>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>2018-03-14</strong></td>
+                <td>二月初一(3/17)</td>
+                <td>香 蠟燭 金紙 水果</td>
+                <td class="status">已送達</td>
+                <td class="col_delete">
+                    <button class="btn_delete" onclick="">取消訂單</button>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>2018-02-15</strong></td>
+                <td>春節(2/16)</td>
+                <td>香 蠟燭 金紙 餅乾</td>
+                <td class="status">已送達</td>
+                <td class="col_delete">
+                    <button class="btn_delete" onclick="">取消訂單</button>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>2018-02-13</strong></td>
+                <td>除夕(2/15)</td>
+                <td>香 蠟燭 金紙</td>
+                <td class="status">已送達</td>
+                <td class="col_delete">
+                    <button class="btn_delete" onclick="deleteorder(this)">取消訂單</button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var order_rows = document.getElementsByClassName('tr_order');
+        var status_cols = document.getElementsByClassName('status');
+        var delete_cols = document.getElementsByClassName('btn_delete');
+        document.onload = changestatus();
+
+        function changestatus() {
+            for (var i = 0; i < status_cols.length; i++) {
+                if (status_cols[i].innerHTML === '已送達') {
+                    console.log(delete_cols[i].innerHTML);
+                    delete_cols[i].style.display = 'none';
+                }
+            }
+        }
+
+        function deleteorder(source) {
+            alert('確定刪除這筆訂單？');
+            for (var i = 0; i < status_cols.length; i++) {
+                if (delete_cols[i] === source) {
+                    order_rows[i].style.display = 'none';
+                }
+            }
+
+        }
+    </script>
+{% endblock %}

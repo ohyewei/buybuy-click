@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}喜好設定{% endblock %}
+{% block content %}
+    <div class="middle_page">
+        <div><p id="currentgoods">目前訂購商品為：香 蠟燭 金紙</p></div>
+        <div id="tabsF">
+            <ul>
+                <li id="current"><a href="javascript://" onclick="loadTab(this,1);"><span>拜拜用品</span></a></li>
+                <li><a href="javascript://" onclick="loadTab(this,2);"><span>乾貨</span></a></li>
+                <li><a href="javascript://" onclick="loadTab(this,3);"><span>其他食物</span></a></li>
+            </ul>
+        </div>
+        <div id="tabsC">
+            <div id="S1" style="display:inline;">
+                <table class=reqtable style="width:100%">
+                    <tr>
+                        <td>蠟燭</td>
+                        <td>金紙</td>
+                        <td>香</td>
+                    </tr>
+                    <tr>
+                        <td><img src="/static/image/c01-candle.jpg" class="goodsimg" onclick="imgOnclick(this)"
+                                 onclick="imgOnclick(this)"></td>
+                        <td><img src="/static/image/c01-ghostmoney.jpg" class="goodsimg" onclick="imgOnclick(this)"
+                                 onclick="imgOnclick(this)"></td>
+                        <td><img src="/static/image/c01-incense.jpg" class="goodsimg" onclick="imgOnclick(this)"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="goods" value="蠟燭"></td>
+                        <td><input type="checkbox" class="goods" value="金紙"></td>
+                        <td><input type="checkbox" class="goods" value="香"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="S2" style="display:none;">
+                <table class=reqtable style="width:100%">
+                    <tr>
+                        <td>餅乾</td>
+                        <td>泡麵</td>
+                    </tr>
+                    <tr>
+                        <td><img src="/static/image/c02-cookies.jpg" class="goodsimg" onclick="imgOnclick(this)"></td>
+                        <td><img src="/static/image/c02-noodles.jpg" class="goodsimg" onclick="imgOnclick(this)"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="goods" value="餅乾"></td>
+                        <td><input type="checkbox" class="goods" value="泡麵"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="S3" style="display:none;">
+                <table class=reqtable style="width:100%">
+                    <tr>
+                        <td>紅龜粿</td>
+                        <td>三牲</td>
+                        <td>水果</td>
+                    </tr>
+                    <tr>
+                        <td><img src="/static/image/c03-cake.jpg" class="goodsimg" onclick="imgOnclick(this)"></td>
+                        <td><img src="/static/image/c03-meal.jpg" class="goodsimg" onclick="imgOnclick(this)"></td>
+                        <td><img src="/static/image/c03-orange.jpg" class="goodsimg" onclick="imgOnclick(this)"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="goods" value="紅龜粿"></td>
+                        <td><input type="checkbox" class="goods" value="三牲"></td>
+                        <td><input type="checkbox" class="goods" value="水果"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="padding-top: 10px;">
+            <button id="_btnsubmit" class="btnsubmit" onclick="showPopup()">送出</button>
+        </div>
+    </div>
+
+    <div id="_popup" class="poptocheck">
+        <div class="pop-content">
+            <div class="pop-header">確認訂購項目</div>
+            <p id="_message"></p>
+            <button class="btn_ok" onclick="closePop()">確認</button>
+        </div>
+    </div>
+
+    <script>
+        {#Switch to other tab#}
+
+        function loadTab(obj, n) {
+            var layer;
+            eval('layer=\'S' + n + '\'');
+
+            var tabsF = document.getElementById('tabsF').getElementsByTagName('li');
+            for (var i = 0; i < tabsF.length; i++) {
+                tabsF[i].setAttribute('id', null);
+                eval('document.getElementById(\'S' + (i + 1) + '\').style.display=\'none\'')
+            }
+
+            obj.parentNode.setAttribute('id', 'current');
+            document.getElementById(layer).style.display = 'inline';
+        }
+
+        <!-- Pop up to check -->
+        var modal = document.getElementById('_popup');  // Get the modal
+        var messages="";
+        function showPopup() {
+            //When click on "Submit" show the pop-up
+            modal.style.display = "block";
+            var checks = document.getElementsByClassName('goods');
+            // Messages show on the pop-up
+            var messages_before = '您選擇了：';
+            messages=""; //initialize
+            for (i = 0; i < 8; i++) {
+                if (checks[i].checked === true) {
+                    messages += checks[i].value + ' ';
+                }
+            }
+            document.getElementById('_message').innerHTML = messages_before+messages;
+        }
+
+        // When the user clicks on OK,close the pop-up
+        function closePop() {
+            document.getElementById('currentgoods').innerHTML ='目前訂購商品為：'+messages;
+            modal.style.display = "none";
+        }
+
+        function imgOnclick(source) {
+            var checks = document.getElementsByClassName('goods');
+            var checksimg = document.getElementsByClassName('goodsimg');
+            for (i = 0; i < 8; i++) {
+                if (checksimg[i] === source) {
+                    //Change the selected status
+                    checks[i].checked ? checks[i].checked = false : checks[i].checked = true;
+                }
+            }
+        }
+    </script>
+
+{% endblock %}

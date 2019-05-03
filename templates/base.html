@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mainstyle.css' %}">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/menuTab.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/order-style.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<div class="page_header">
+    <div id="toolbar">
+        <div class="button"><img src='/static/image/logo.png' style="width:100%;height:100%;"></div>
+        <ul class="icons">
+            <li><a href={% url 'home' %}><img class="navicons" src='/static/image/icon-home.png'/></a></li>
+            <li><a href={% url 'req' %}><img class="navicons" src='/static/image/icon-list.png'/></a></li>
+            <li><a href={% url 'order' %}><img class="navicons" src='/static/image/icon-setting.png'/></a></li>
+        </ul>
+    </div>
+</div>
+
+
+{% block content %}{% endblock %}
+
+</body>
+</html>
+
+<script>
+    $(".button").click(function () {
+        $(this).toggleClass("active");
+        $(".icons").toggleClass("open");
+    });
+</script>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mainstyle.css' %}">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+<div class="home_header">
+    <div class="home_header_text left">拜拜.</div>
+    <div class="home_header_center"></div>
+    <div class="home_header_text right">click()</div>
+</div>
+
+<div>
+    <div class="three-column">
+        <div class="social-btns"><a class="btn btn_req" href={% url 'login' %}>註冊/登入</a></div>
+    </div>
+    <div class="three-column">
+        <div class="social-btns"><a class="btn btn_req" href={% url 'req' %}>喜好設定</a></div>
+    </div>
+    <div class="three-column">
+        <div class="social-btns"><a class="btn btn_req" href={% url 'order' %}>查看訂單</a></div>
+    </div>
+</div>
+
+</body>
+
+</html>
